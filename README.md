@@ -1,77 +1,232 @@
+# BigBrotherBot (B3) - Python 3 Edition
+
 ![BigBrotherBot](https://github.com/BigBrotherBot/ArtWork/blob/master/layered-png/logo.png)
 
-**********
+**Complete game server administration bot with Python 3 support and advanced security features**
 
-![status: seeking maintainer](https://img.shields.io/badge/status-seeking%20maintainer-yellow.svg)
+## 🚀 What is B3?
 
-```
-This project is NO LONGER actively maintained. It is provided 'as is' in its current state! 
-If you wish to apply as project maintainer please contact B3 development team by opening a 
-topic on the B3 forums.
+BigBrotherBot (B3) is a comprehensive server administration package for online games. It automatically manages your server by monitoring player behavior, enforcing rules, and providing administrative tools through in-game commands.
 
-B3 Development Team
-```
+## ✨ Key Features
 
-Big Brother Bot (B3) is a complete and total server administration package for online games. It is the prefered ingame
-RCON Tool currently available. B3 is designed primarily to keep your server free from the derelicts of online gaming,
-but offers more, much more. With the stock configuration files, B3 will keep your server free from offensive language,
-and team killers alike. A completely automated and customizable warning system will warn the offending players that this
-type of behavior is not allowed on your server, and ultimately kick, and or ban them for a predetermined time limit.
+### 🛡️ **Core Administration**
+- **Automated moderation** - Warns, kicks, and bans disruptive players
+- **Anti-spam protection** - Prevents chat flooding and spam
+- **Team kill protection** - Automatically handles team killers
+- **Language filtering** - Blocks offensive content with customizable word lists
+- **Welcome system** - Greets players with custom messages
 
-Game servers supported: 
+### 🌍 **Geolocation Features**
+- **Country detection** - Shows player locations and flags
+- **Geographic welcomes** - Location-based greeting messages
+- **Location commands** - `!location` command to check player countries
+- **Multi-provider support** - Uses multiple IP geolocation services
 
-- Altitude
-- Arma II
-- Arma III
-- Battlefield 3
-- Battlefield 4
-- Battlefield Bad Company 2
-- Battlefield Hardline
-- Chivalry Medieval Warfare
-- Call of Duty 1
-- Call of Duty 2
-- Call of Duty 4: Modern Warfare (iw3)
-- Call of Duty 4: GameRanger
-- Call of Duty 5: World at War
-- Call of Duty 6: Modern Warfare 2 (iw5)
-- Call of Duty 7: Black Ops        (t6)
-- Call of Duty 8: Modern Warfare 3 (iw5)
+### 🔒 **Advanced Security**
+- **VPN/Proxy blocker** - Automatically detects and blocks VPN/proxy users
+- **Multi-API detection** - Uses multiple VPN detection services
+- **Smart caching** - Reduces API calls with intelligent IP caching
+- **Admin override** - Whitelist trusted players using VPNs
+
+### 📊 **Statistics & Tracking**
+- **XLRstats integration** - Detailed player statistics and rankings  
+- **Skill tracking** - ELO-based skill rating system
+- **Match history** - Comprehensive game statistics
+- **Leaderboards** - Top player rankings and achievements
+
+### 🎮 **Player Management**
+- **Registration system** - Player account management
+- **Admin levels** - Hierarchical permission system (0-100)
+- **Temporary bans** - Time-based punishment system
+- **Custom commands** - Create your own server commands
+- **Ping monitoring** - Auto-kick high ping players
+
+### 🔧 **Technical Features**
+- **Python 3.8+ compatible** - Fully migrated from Python 2
+- **Cross-platform** - Works on Windows, Linux, and macOS
+- **Database support** - MySQL, PostgreSQL, SQLite
+- **Plugin system** - 40+ built-in plugins, extensible architecture
+- **Real-time monitoring** - Live game log parsing
+- **RCON integration** - Direct server communication
+
+## 🎯 Supported Games
+
+**Call of Duty Series:**
+- COD 1, 2, 4 (Modern Warfare), 5 (World at War)
+- COD 6 (MW2), 7 (Black Ops), 8 (MW3)
+
+**Battlefield Series:**
+- Battlefield 3, 4, Bad Company 2, Hardline
+
+**Urban Terror:**
+- Urban Terror 4.1, 4.2, 4.3
+
+**Other Games:**
 - Counter-Strike: Global Offensive
-- Enemy Territory
-- Enemy Territory Pro
-- Insurgency
-- Urban Terror 4.1 (ioUrT)
-- Urban Terror 4.2
-- Urban Terror 4.3
-- Medal of Honor 2010
-- Medal of Honor Warfighter
-- Open Arena
-- Red Orchestra 2
-- Smokin' Guns
-- Soldier of Fortune 2
-- World of Padman
+- Medal of Honor (2010, Warfighter)
+- Enemy Territory, Arma II/III, Insurgency
+- And 20+ more games!
 
-## Links to our online presence
+## 🚀 Quick Start
 
-* [Master server](http://master.bigbrotherbot.net/)
-* [Bug tracker](https://github.com/BigBrotherBot/big-brother-bot/issues)
-* [Documentation](https://github.com/BigBrotherBot/big-brother-bot/wiki)
+### Prerequisites
+- Python 3.8 or higher
+- Game server with RCON access
+- Database (MySQL recommended)
 
+### Installation
+1. **Download B3:**
+   ```bash
+   git clone https://github.com/YourUsername/big-brother-bot.git
+   cd big-brother-bot
+   ```
 
-## Installation, configuration and usage
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Please refer to our documentation wiki as linked above for a full manual.
+3. **Configure B3:**
+   - Edit `b3/conf/b3.xml` with your server details
+   - Update plugin configs in `b3/conf/`
+   - Set database connection settings
 
+4. **Run B3:**
+   ```bash
+   python b3_run.py
+   ```
 
-## Previous and Current Developers (Hall of Fame)
+## 🎛️ Admin Commands
 
-_[ThorN], [xlr8or], ttlogic, [Courgette], [Fenix], [Bakes], [spacepig], [Durzo], eire.32, [grosbedo], [Freelander], [82ndAB.Bravo17], 
-[Just a baka], [Ozon]_ and a big thanks to you, who has offered us snippets of code and improvements on an 
-incidental basis. Without you B3 wouldn't be this intelligent!
+### Basic Commands
+- `!kick <player>` - Kick a player
+- `!ban <player>` - Ban a player  
+- `!tempban <player> <duration>` - Temporary ban
+- `!warn <player> <reason>` - Warn a player
 
-[![Requirements Status](https://requires.io/github/BigBrotherBot/big-brother-bot/requirements.svg?branch=master)](https://requires.io/github/BigBrotherBot/big-brother-bot/requirements/?branch=master)
-[![Code Health](https://landscape.io/github/BigBrotherBot/big-brother-bot/master/landscape.svg?style=flat)](https://landscape.io/github/BigBrotherBot/big-brother-bot/master)
-[![Coverage Status](https://coveralls.io/repos/BigBrotherBot/big-brother-bot/badge.svg?branch=master)](https://coveralls.io/r/BigBrotherBot/big-brother-bot?branch=master)
+### Information Commands
+- `!leveltest <player>` - Check player admin level
+- `!location <player>` - Show player's country
+- `!stats <player>` - Show player statistics
+- `!list` - List online players
+
+### VPN Protection
+- `!vpncheck <player>` - Check if player uses VPN
+- `!vpnwhitelist <player>` - Allow VPN for trusted player
+- `!vpnstats` - Show VPN blocker statistics
+
+## 🔧 Configuration
+
+### Main Config (`b3/conf/b3.xml`)
+```xml
+<configuration>
+  <settings name="server">
+    <set name="game">cod4x18</set>
+    <set name="ip">127.0.0.1</set>
+    <set name="port">28960</set>
+    <set name="rcon_password">your_rcon_password</set>
+  </settings>
+  
+  <plugins>
+    <plugin name="admin" config="@conf/plugin_admin.ini"/>
+    <plugin name="geolocation"/>
+    <plugin name="vpnblocker" config="@b3/extplugins/conf/vpnblocker.ini"/>
+    <!-- Add more plugins here -->
+  </plugins>
+</configuration>
+```
+
+### VPN Blocker Setup
+Edit `b3/extplugins/conf/vpnblocker.ini`:
+```ini
+[settings]
+enabled = True
+action = kick
+vpnapi_key = your_vpnapi_key
+proxycheck_key = your_proxycheck_key
+max_api_calls_per_minute = 30
+```
+
+## 🔌 Plugin System
+
+B3 includes 40+ plugins:
+- **admin** - Core admin commands
+- **welcome** - Player greeting system  
+- **spamcontrol** - Anti-spam protection
+- **xlrstats** - Player statistics
+- **geolocation** - Country detection
+- **vpnblocker** - VPN/proxy protection
+- **pingwatch** - Ping monitoring
+- **tk** - Team kill management
+- And many more!
+
+## 🛠️ Development
+
+### Python 3 Migration
+This version has been fully migrated to Python 3.8+:
+- All print statements converted to functions
+- Fixed string/bytes handling
+- Updated deprecated modules
+- Modernized exception handling
+- Fixed plugin loading system
+
+### Creating Custom Plugins
+```python
+import b3.plugin
+
+class MyPlugin(b3.plugin.Plugin):
+    def onStartup(self):
+        self.registerEvent('EVT_CLIENT_SAY', self.onSay)
+    
+    def onSay(self, event):
+        # Handle player chat
+        pass
+```
+
+## 📝 Recent Updates
+
+- ✅ **Python 3.8+ compatibility** - Fully migrated from Python 2
+- ✅ **VPN blocker plugin** - Advanced proxy/VPN detection  
+- ✅ **Geolocation fixes** - Country detection now working
+- ✅ **Plugin system fixes** - All 40+ plugins loading correctly
+- ✅ **Database improvements** - Better error handling
+- ✅ **Performance optimizations** - Faster startup and operation
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📜 License
+
+This project is licensed under the GNU General Public License v2.0 - see the LICENSE file for details.
+
+## 🏆 Hall of Fame
+
+Thanks to all contributors who made B3 possible:
+_[ThorN], [xlr8or], ttlogic, [Courgette], [Fenix], [Bakes], [spacepig], [Durzo], eire.32, [grosbedo], [Freelander], [82ndAB.Bravo17], [Just a baka], [Ozon]_ and many others!
+
+---
+
+**Ready to secure your game server? Install B3 today and experience professional-grade server administration!**
+
+[ThorN]: https://github.com/six8
+[xlr8or]: https://github.com/markweirath  
+[Courgette]: https://github.com/thomasleveil
+[Bakes]: https://github.com/j-baker
+[spacepig]: https://github.com/spacepig
+[Durzo]: https://github.com/durzo
+[grosbedo]: https://github.com/grosbedo
+[Freelander]: https://github.com/ozguruysal
+[82ndAB.Bravo17]: https://github.com/82ndab-Bravo17
+[Just a baka]: https://github.com/justabaka
+[Fenix]: https://github.com/danielepantaleone
+[Ozon]: https://github.com/ozon
 
 [ThorN]: https://github.com/six8
 [xlr8or]: https://github.com/markweirath
