@@ -1,0 +1,9 @@
+# Python modules needed for optional B3 features
+# If you want to use a PosgreSQL database
+psycopg2>=2.9.0,<3
+
+# If you need a secure connection (SFTP plugin)
+paramiko>=2.12.0,<3
+
+# Port of Google's langdetect, for translator plugin to exclude languages
+langdetect>=1.0.9,<2
