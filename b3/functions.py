@@ -235,7 +235,7 @@ def escape(text, esc):
     :param esc: The character to escape
     :return: string
     """
-    return string.replace(text, esc, '\\%s' % esc)
+    return text.replace(esc, '\\%s' % esc)
 
 
 def decode(text):

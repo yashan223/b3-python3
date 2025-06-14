@@ -44,7 +44,10 @@ except ImportError:
 from b3.functions import escape
 from b3.functions import getCmd
 from b3.functions import right_cut
-from ConfigParser import NoOptionError
+try:
+    from configparser import NoOptionError
+except ImportError:
+    from ConfigParser import NoOptionError  # fallback for legacy
 
 KILLER = "killer"
 VICTIM = "victim"
@@ -210,9 +213,7 @@ class XlrstatsPlugin(b3.plugin.Plugin):
         self.registerEvent('EVT_CLIENT_SUICIDE', self.onSuicide)
         self.registerEvent('EVT_GAME_ROUND_START', self.onRoundStart)
         self.registerEvent('EVT_CLIENT_ACTION', self.onAction)       # for game-events/actions
-        self.registerEvent('EVT_CLIENT_DAMAGE', self.onDamage)       # for assist recognition
-
-        # get the Client.id for the bot itself (guid: WORLD or Server(bfbc2/moh/hf))
+        self.registerEvent('EVT_CLIENT_DAMAGE', self.onDamage)       # for assist recognition        # get the Client.id for the bot itself (guid: WORLD or Server(bfbc2/moh/hf))
         sclient = self.console.clients.getByGUID("WORLD")
         if sclient is None:
             sclient = self.console.clients.getByGUID("Server")
@@ -225,6 +226,20 @@ class XlrstatsPlugin(b3.plugin.Plugin):
             if player:
                 player.hide = 1
                 self.save_Stat(player)
+        else:
+            # Create WORLD client if it doesn't exist
+            self.debug('WORLD/Server client not found, creating one...')
+            try:
+                # Create a fake WORLD client
+                sclient = self.console.clients.newClient(-1, guid="WORLD", name="World", ip="0.0.0.0")
+                sclient.save()
+                self._world_clientid = sclient.id
+                self.debug('created WORLD client with id: %s' % self._world_clientid)
+            except Exception as e:
+                self.error('failed to create WORLD client: %s' % e)
+                # Use a default ID as fallback
+                self._world_clientid = 0
+                self.debug('using fallback world_clientid: 0')
 
         # determine the ability to work with damage based assists
         if self.console.gameName in self._damage_able_games:
@@ -275,12 +290,14 @@ class XlrstatsPlugin(b3.plugin.Plugin):
 
         #start the xlrstats controller
         #p = XlrstatscontrollerPlugin(self.console, self.min_players, self.silent)
-        #p.onStartup()
-
-        # get the map we're in, in case this is a new map and we need to create a db record for it.
-        mapstats = self.get_MapStats(self.console.game.mapName)
-        if mapstats:
-            self.verbose('map %s ready' % mapstats.name)
+        #p.onStartup()        # get the map we're in, in case this is a new map and we need to create a db record for it.
+        current_map = self.console.game.mapName
+        if current_map:
+            mapstats = self.get_MapStats(current_map)
+            if mapstats:
+                self.verbose('map %s ready' % mapstats.name)
+        else:
+            self.debug('current map name is not available yet, skipping map stats initialization')
 
         # check number of online players (if available)
         self.checkMinPlayers()
@@ -1441,16 +1458,21 @@ class XlrstatsPlugin(b3.plugin.Plugin):
         # alterations to columns in existing tables:
         self._updateTableColumns()
         return None
-        # end of update check
-
-    def _addTableColumn(self, c1, t1, specs):
+        # end of update check    def _addTableColumn(self, c1, t1, specs):
         try:
             self.query("""SELECT %s FROM %s limit 1;""" % (c1, t1))
+            self.debug('column %s already exists in %s' % (c1, t1))
         except Exception as e:
-            if e[0] == 1054:
+            if hasattr(e, 'args') and len(e.args) > 0 and e.args[0] == 1054:
                 self.console.debug('column does not yet exist: %s' % e)
-                self.query("""ALTER TABLE %s ADD %s %s ;""" % (t1, c1, specs))
-                self.console.info('created new column `%s` on %s' % (c1, t1))
+                try:
+                    self.query("""ALTER TABLE %s ADD %s %s ;""" % (t1, c1, specs))
+                    self.console.info('created new column `%s` on %s' % (c1, t1))
+                except Exception as alter_e:
+                    if hasattr(alter_e, 'args') and len(alter_e.args) > 0 and alter_e.args[0] == 1060:
+                        self.console.debug('column %s already exists in %s (duplicate column error)' % (c1, t1))
+                    else:
+                        self.console.error('failed to add column %s to %s: %s' % (c1, t1, alter_e))
             else:
                 self.console.error('query failed - %s: %s' % (type(e), e))
 
@@ -1476,7 +1498,9 @@ class XlrstatsPlugin(b3.plugin.Plugin):
             self.console.verbose('available XLRstats tables in this database: %s', _tables)
         else:
             self.console.verbose('available tables in this database: %s', _tables)
-        return _tables    def optimizeTables(self, t=None):
+        return _tables
+
+    def optimizeTables(self, t=None):
         if not t:
             t = self.showTables()
         if isinstance(t, str):
@@ -1493,7 +1517,8 @@ class XlrstatsPlugin(b3.plugin.Plugin):
 
     def repairTables(self, t=None):
         if not t:
-            t = self.showTables()        if isinstance(t, str):
+            t = self.showTables()
+        if isinstance(t, str):
             _tables = str(t)
         else:
             _tables = ', '.join(t)
@@ -1554,6 +1579,16 @@ class XlrstatsPlugin(b3.plugin.Plugin):
                   self.playerstats_table, self._world_clientid,
                   self.playerstats_table, self.playerstats_table, self.Kswitch_confrontations,
                   int(time.time()), self.clients_table, _seconds)
+
+        # Debug: Print the query and check for None values
+        self.debug('correctStats query: %s', q)
+        self.debug('Table names - playerstats: %s, clients: %s', self.playerstats_table, self.clients_table)
+        self.debug('Values - world_clientid: %s, Kswitch_confrontations: %s', self._world_clientid, self.Kswitch_confrontations)
+        
+        # Check for None values that could cause SQL errors
+        if None in [self.playerstats_table, self.clients_table, self._world_clientid, self.Kswitch_confrontations]:
+            self.error('correctStats: One or more required values is None, skipping stats correction')
+            return None
 
         cursor = self.query(q)
         # self.verbose(q)
@@ -1666,6 +1701,7 @@ class XlrstatsPlugin(b3.plugin.Plugin):
                     'ratio': '%1.02f' % stats.ratio,
                     'skill': '%1.02f' % stats.skill,
                 }
+               
                 message = self.getMessage('cmd_xlrstats', message_vars)
                 cmd.sayLoudOrPM(client, message)
         else:
@@ -2139,7 +2175,7 @@ class CtimePlugin(b3.plugin.Plugin):
         Purge the ctime database table.
         """
         if not self._max_age_in_days or self._max_age_in_days == 0:
-            self.warning(u'max_age is invalid [%s]', self._max_age_in_days)
+            self.warning(u'max_age is invalid [%s]' % self._max_age_in_days)
             return False
 
         self.info(u'purge of connection info older than %s days ...', self._max_age_in_days)
@@ -2605,24 +2641,3 @@ class PlayerBattles(StatObject):
     actions = 0
     weapon_kills = {}
     favorite_weapon_id = 0
-
-
-if __name__ == '__main__':
-    print('\nThis is version ' + __version__ + ' by ' + __author__ + ' for BigBrotherBot.\n')
-
-"""
-Crontab:
-*  *  *  *  *  command to be executed
--  -  -  -  -
-|  |  |  |  |
-|  |  |  |  +----- day of week (0 - 6) (Sunday=0)
-|  |  |  +------- month (1 - 12)
-|  |  +--------- day of month (1 - 31)
-|  +----------- hour (0 - 23)
-+------------- min (0 - 59)
-
-Query:
-INSERT INTO xlr_history_weekly (`client_id` , `kills` , `deaths` , `teamkills` , `teamdeaths` , `suicides` , `ratio` , `skill` , `winstreak` , `losestreak` , `rounds`, `year`, `month`, `week`, `day`) 
-  SELECT `client_id` , `kills` , `deaths` , `teamkills` , `teamdeaths` , `suicides` , `ratio` , `skill` , `winstreak` , `losestreak` , `rounds`, YEAR(NOW()), MONTH(NOW()), WEEK(NOW(),3), DAY(NOW()) 
-  FROM `xlr_playerstats`
-"""
