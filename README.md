@@ -202,10 +202,6 @@ Contributions are welcome! Please:
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📜 License
-
-This project is licensed under the GNU General Public License v2.0 - see the LICENSE file for details.
-
 ## 🏆 Hall of Fame
 
 Thanks to all contributors who made B3 possible:
