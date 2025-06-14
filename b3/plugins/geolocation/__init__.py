@@ -31,11 +31,11 @@ import b3.plugin
 import b3.events
 import threading
 
-from .exceptions import GeolocalizationError
-from .geolocators import FreeGeoIpGeolocator
-from .geolocators import IpApiGeolocator
-from .geolocators import MaxMindGeolocator
-from .geolocators import TelizeGeolocator
+from b3.plugins.geolocation.exceptions import GeolocalizationError
+from b3.plugins.geolocation.geolocators import FreeGeoIpGeolocator
+from b3.plugins.geolocation.geolocators import IpApiGeolocator
+from b3.plugins.geolocation.geolocators import MaxMindGeolocator
+from b3.plugins.geolocation.geolocators import TelizeGeolocator
 
 
 class GeolocationPlugin(b3.plugin.Plugin):

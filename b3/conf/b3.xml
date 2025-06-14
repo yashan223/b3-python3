@@ -48,7 +48,7 @@
     <plugin name="admin" config="@conf/plugin_admin.ini"/>
     <plugin name="adv" config="@conf/plugin_adv.xml"/>
     <plugin name="customcommands" config="@conf/plugin_customcommands.ini"/>
-    <!-- Temporarily disabled due to missing geolocation dependency -->
+    <plugin name="geolocation"/>
     <plugin name="geowelcome" config="@conf/plugin_geowelcome.ini"/> 
     <plugin name="location" config="@conf/plugin_location.ini"/> 
     <plugin name="spamcontrol" config="@conf/plugin_spamcontrol.ini"/>
