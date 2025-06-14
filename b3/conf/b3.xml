@@ -49,11 +49,12 @@
     <plugin name="adv" config="@conf/plugin_adv.xml"/>
     <plugin name="customcommands" config="@conf/plugin_customcommands.ini"/>
     <!-- Temporarily disabled due to missing geolocation dependency -->
-    <!-- <plugin name="geowelcome" config="@conf/plugin_geowelcome.ini"/> -->
-    <!-- <plugin name="location" config="@conf/plugin_location.ini"/> -->
+    <plugin name="geowelcome" config="@conf/plugin_geowelcome.ini"/> 
+    <plugin name="location" config="@conf/plugin_location.ini"/> 
     <plugin name="spamcontrol" config="@conf/plugin_spamcontrol.ini"/>
     <plugin name="welcome" config="@conf/plugin_welcome.ini"/>
     <plugin name="xlrstats" config="@conf/plugin_xlrstats.ini"/>
     <plugin name="pingwatch" config="@conf/plugin_pingwatch.ini"/>
+    <plugin name="vpnblocker" config="@b3/extplugins/conf/vpnblocker.ini"/>
   </plugins>
 </configuration>
