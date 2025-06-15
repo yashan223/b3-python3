@@ -47,15 +47,15 @@ __version__ = '2.0.0'
 modulePath = pkg_handler.resource_directory(__name__)
 
 versionId = '%s-Nyx' % __version__
-version = '^5⚡ ^8b3.xoxod33p.me ^0[^6Nyx^7Guard^1B3^0] ^9%s' % __version__
+version = '^5⚡ ^8b3.xoxod33p.me ^0[^6Nyx ^1B3^0] ^9%s' % __version__
 
 confdir = None
 console = None
 
 # STRINGS
-B3_TITLE = '⚡ NyxGuard - Sentinel %s' % versionId
-B3_TITLE_SHORT = 'NyxGuard %s' % versionId
-B3_COPYRIGHT = '© 2005 ThorN | ⚡ 2025 NyxGuard B3 by xoxod33p'
+B3_TITLE = '⚡ Nyx - Sentinel %s' % versionId
+B3_TITLE_SHORT = 'Nyx %s' % versionId
+B3_COPYRIGHT = '© 2005 ThorN | ⚡ 2025 Nyx B3 by xoxod33p'
 B3_LICENSE = 'GNU General Public License v2'
 B3_FORUM = 'http://forum.bigbrotherbot.net/'
 B3_WEBSITE = 'http://www.bigbrotherbot.net'
