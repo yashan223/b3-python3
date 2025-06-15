@@ -41,28 +41,28 @@ except ImportError:
     from configparser import NoOptionError
     from configparser import NoSectionError
 
-__author__ = 'ThorN'
-__version__ = '1.12'
+__author__ = 'ThorN, xoxod33p'
+__version__ = '2.0.0-ceylon'
 
 modulePath = pkg_handler.resource_directory(__name__)
 
-versionId = 'v%s' % __version__
-version = '^8www.bigbrotherbot.net ^0(^8b3^0) ^9%s ^9[^3IronPigeon^9]^3' % versionId
+versionId = '%s-Ceylon' % __version__
+version = '^2🇱🇰 ^8xoxod33p.me ^0[^1Ceylon^7War^8fare^0] ^9%s ^0- ^6COD4X18^2✓^0' % __version__
 
 confdir = None
 console = None
 
 # STRINGS
-B3_TITLE = 'BigBrotherBot (B3) %s' % versionId
-B3_TITLE_SHORT = 'B3 %s' % versionId
-B3_COPYRIGHT = 'Copyright © 2005 Michael "ThorN" Thornton'
+B3_TITLE = '🏴󠁧󠁢󠁳󠁣󠁴󠁿 Ceylon Warfare Bot - COD4X18 Edition %s' % versionId
+B3_TITLE_SHORT = 'CeylonBot %s' % versionId
+B3_COPYRIGHT = '© 2005 ThorN | 🇱🇰 2025 Ceylon Edition by xoxod33p'
 B3_LICENSE = 'GNU General Public License v2'
-B3_FORUM = 'http://forum.bigbrotherbot.net/'
-B3_WEBSITE = 'http://www.bigbrotherbot.net'
-B3_WIKI = 'http://wiki.bigbrotherbot.net/'
-B3_CONFIG_GENERATOR = 'http://config.bigbrotherbot.net/'
-B3_DOCUMENTATION = 'http://doc.bigbrotherbot.net/'
-B3_DONATE = 'http://www.bigbrotherbot.net/donate'
+B3_FORUM = 'https://discord.gg/ceylonwarfare'
+B3_WEBSITE = 'https://xoxod33p.me'
+B3_WIKI = 'https://b3.xoxod33p.me/wiki'
+B3_CONFIG_GENERATOR = 'https://b3.xoxod33p.me/config'
+B3_DOCUMENTATION = 'https://b3.xoxod33p.me/docs'
+B3_DONATE = 'https://buymeacoffee.com/xoxod33p'
 B3_XLRSTATS = 'http://www.xlrstats.com/'
 B3_PLUGIN_REPOSITORY = 'http://forum.bigbrotherbot.net/downloads/?cat=4'
 B3_RSS = 'http://forum.bigbrotherbot.net/news-2/?type=rss;action=.xml'
