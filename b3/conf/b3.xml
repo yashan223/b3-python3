@@ -23,11 +23,6 @@
     <set name="punkbuster">off</set>
     <set name="game_log">C:\Local Disk D\cod4\Mods\flagmod_promodlive220_raw\games_mp.log</set>
   </settings>
-  <settings name="autodoc">
-    <set name="type">html</set>
-    <set name="maxlevel">100</set>
-    <set name="destination">@conf/b3_doc.html</set>
-  </settings>
   <settings name="update">
     <set name="channel">skip</set>
   </settings>

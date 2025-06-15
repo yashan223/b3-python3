@@ -24,8 +24,12 @@ import struct
 
 def nreverse(sequence):
     """nreverse in Common Lisp. :)"""
-    sequence.reverse()
-    return sequence
+    if hasattr(sequence, 'reverse'):
+        sequence.reverse()
+        return sequence
+    else:
+        # For range objects in Python 3
+        return list(reversed(sequence))
 
 class GeoIP(object):
 
