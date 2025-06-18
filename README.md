@@ -38,7 +38,7 @@ BigBrotherBot (B3) is a server administration tool that automatically manages yo
 
 **Windows:**
 ```cmd
-install_dependencies.bat
+windows_setup.bat
 ```
 
 **Linux:**
@@ -52,53 +52,6 @@ chmod +x linux_setup.sh
    - Set your server IP, port, and RCON password
    - Configure database connection
    - Set game log path
-
-2. **Run B3:**
-   ```bash
-   python b3_run.py
-   ```
-
-## 🎛️ Essential Commands
-
-- `!kick <player>` - Kick a player
-- `!ban <player>` - Ban a player  
-- `!tempban <player> <duration>` - Temporary ban
-- `!warn <player> <reason>` - Warn a player
-- `!location <player>` - Show player's country
-- `!stats <player>` - Show player statistics
-- `!b3` - Show B3 version and status
-
-## ⚙️ Included Plugins
-
-**Core Plugins (12):**
-- **admin** - Basic admin commands
-- **welcome** - Player greeting system
-- **spamcontrol** - Anti-spam protection
-- **stats** - Player statistics
-- **xlrstats** - Advanced stats with skill rating
-- **location** - Geolocation services
-- **geowelcome** - Location-based welcomes
-- **customcommands** - Custom server commands
-- **pingwatch** - Ping monitoring
-- **adv** - Server advertisements
-- **vpnblocker** - VPN/proxy detection
-- **publist** - Server listing integration
-## 🔧 Basic Configuration
-
-Edit `b3/conf/b3.xml` with your COD4X18 server details:
-```xml
-<settings name="server">
-  <set name="rcon_password">your_rcon_password</set>
-  <set name="port">28960</set>
-  <set name="public_ip">your_server_ip</set>
-  <set name="game_log">path/to/games_mp.log</set>
-</settings>
-
-<settings name="b3">
-  <set name="parser">cod4x18</set>
-  <set name="database">mysql://user:pass@localhost/b3_db</set>
-</settings>
-```
 
 ## � Requirements
 
@@ -114,20 +67,6 @@ Edit `b3/conf/b3.xml` with your COD4X18 server details:
 - **Streamlined build** - Only essential plugins included
 - **Production ready** - All major bugs fixed
 
----
-
-**Ready to manage your COD4X18 server like a pro!** 🎮
-```python
-import b3.plugin
-
-class MyPlugin(b3.plugin.Plugin):
-    def onStartup(self):
-        self.registerEvent('EVT_CLIENT_SAY', self.onSay)
-    
-    def onSay(self, event):
-        # Handle player chat
-        pass
-```
 
 ## 📝 Recent Updates
 
@@ -137,15 +76,6 @@ class MyPlugin(b3.plugin.Plugin):
 - ✅ **Plugin system fixes** - All 40+ plugins loading correctly
 - ✅ **Database improvements** - Better error handling
 - ✅ **Performance optimizations** - Faster startup and operation
-
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
 
 ## 🏆 Hall of Fame
 
