@@ -24,8 +24,7 @@ BigBrotherBot (B3) is a server administration tool that automatically manages yo
 ## 🎯 Supported Games
 
 **Call of Duty Series:**
-- COD 1, 2, 4 (Modern Warfare), 5 (World at War)
-- COD 6 (MW2), 7 (Black Ops), 8 (MW3)
+- COD4X18 (COD 4 Modern Warfare)
 
 ## 🚀 Quick Start
 
