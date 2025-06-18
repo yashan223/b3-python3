@@ -36,6 +36,9 @@ except ImportError:
     import _thread as thread
 import datetime
 import dateutil.tz
+import importlib
+import importlib.util
+import importlib.machinery
 try:
     import Queue
 except ImportError:
@@ -43,9 +46,6 @@ except ImportError:
 try:
     import imp
 except ImportError:
-    import importlib.util
-    import importlib.machinery
-    
     # Create a compatibility layer for imp functions
     class imp:
         @staticmethod
@@ -1087,9 +1087,7 @@ class Parser(object):
             else:
                 return msg % args
         else:
-            return msg
-
-    @staticmethod
+            return msg    @staticmethod
     def getMessageVariables(*args, **kwargs):
         """
         Dynamically generate a dictionary of fields available for messages in config file.
@@ -1103,7 +1101,7 @@ class Parser(object):
                     variables[obj] = obj
             else:
                 for attr in vars(obj):
-                    pattern = re.compile('[\W_]+')
+                    pattern = re.compile(r'[\W_]+')
                     cleanattr = pattern.sub('', attr)  # trim any underscore or any non alphanumeric character
                     variables[cleanattr] = getattr(obj, attr)
 
@@ -1118,7 +1116,7 @@ class Parser(object):
                 #self.debug('Classname of object %s: %s' % (key, obj.__class__.__name__))
             else:
                 for attr in vars(obj):
-                    pattern = re.compile('[\W_]+')
+                    pattern = re.compile(r'[\W_]+')
                     cleanattr = pattern.sub('', attr)  # trim any underscore or any non alphanumeric character
                     currkey = ''.join([key, cleanattr])
                     variables[currkey] = getattr(obj, attr)
@@ -1739,10 +1737,9 @@ class Parser(object):
     def getPlayerPings(self, filter_client_ids=None):
         """
         Returns a dict having players' id for keys and players' ping for values
-        :param filter_client_ids: If filter_client_id is an iterable, only return values for the given client ids.
-        """
+        :param filter_client_ids: If filter_client_id is an iterable, only return values for the given client ids.        """
         raise NotImplementedError
-
+        
     def getPlayerScores(self):
         """
         Returns a dict having players' id for keys and players' scores for values
@@ -1754,7 +1751,7 @@ class Parser(object):
         Called if b3.admin.penalizeClient() does not know a given penalty type. 
         Overwrite this to add customized penalties for your game like 'slap', 'nuke', 
         'mute', 'kill' or anything you want.
-        /!\ This method must return True if the penalty was inflicted.
+        /!\\ This method must return True if the penalty was inflicted.
         """
         pass
 

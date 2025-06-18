@@ -103,13 +103,13 @@ class MysqlConnectorStorage(DatabaseStorage):
     #   CONNECTION INITIALIZATION/TERMINATION/RETRIEVAL                                                                #
     #                                                                                                                  #
     ####################################################################################################################
-
+    
     def getConnection(self):
         """
         Return the database connection. If the connection has not been established yet, will establish a new one.
         :return The connection instance, or None if no connection can be established.
         """
-        if self.db and self.db._socket is not None:
+        if self.db and self.db.is_connected():
             return self.db
         return self.connect()
 
@@ -117,24 +117,22 @@ class MysqlConnectorStorage(DatabaseStorage):
         """
         Close the current active database connection.
         """
-        if self.db and self.db._socket is not None:
+        if self.db and self.db.is_connected():
             # the shutdown method is already exception safe
             self.console.bot('Closing connection with MySQL database...')
-            self.db.shutdown()
+            self.db.close()
         self.db = None
 
     ####################################################################################################################
     #                                                                                                                  #
     #   UTILITY METHODS                                                                                                #
     #                                                                                                                  #
-    ####################################################################################################################
-
-    def status(self):
+    ####################################################################################################################    def status(self):
         """
         Check whether the connection with the storage layer is active or not.
         :return True if the connection is active, False otherwise.
         """
-        if self.db and self.db._socket is not None:
+        if self.db and self.db.is_connected():
             return True
         return False
 
