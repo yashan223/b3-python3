@@ -43,8 +43,8 @@ install_dependencies.bat
 
 **Linux:**
 ```bash
-chmod +x install_dependencies.sh
-./install_dependencies.sh
+chmod +x linux_setup.sh
+./linux_setup.sh
 ```
 
 ### Configuration
