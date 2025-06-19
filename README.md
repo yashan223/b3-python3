@@ -64,7 +64,7 @@ chmod +x linux_setup.sh
 - **This version is optimized and tested only with COD4X18 servers**
 - **Python 3.8+ required** - Fully migrated from Python 2
 - **Streamlined build** - Only essential plugins included
-- **Production ready** - All major bugs fixed
+- **Can have bus** - Bugs 
 
 
 ## 📝 Recent Updates
